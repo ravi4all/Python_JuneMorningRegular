@@ -33,11 +33,15 @@ def post(current_user):
 
     postData['post'] = user_post
     postData['username'] = current_user['name']
-    postData['date'] = datetime.date()
+    postData['date'] = datetime.now().date()
 
     posts.append(postData.copy())
 
-    print(postData)
+    # print(posts)
+    for p in posts:
+        print(p)
+
+    login_success(current_user)
 
 
 def view_profile(current_user):
