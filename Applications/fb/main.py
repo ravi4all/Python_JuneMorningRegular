@@ -45,10 +45,28 @@ def post(current_user):
 
 
 def view_profile(current_user):
-    pass
+
+    print("Your ID :",current_user['email'])
+    print("Your Name :",current_user['name'])
+
+    for p in posts:
+        if p['username'] == current_user['name']:
+            print("Post",p['post'])
+            print("Post",p['date'])
+
+    login_success(current_user)
+
 
 def update_profile(current_user):
-    pass
+    to_update = input("What do you want to update ? ")
+    updated_value = input("Enter updated {}".format(to_update))
+
+    if to_update == 'name':
+        current_user['name'] = updated_value
+    elif to_update == 'email':
+        current_user['email'] = updated_value
+
+    login_success(current_user)
 
 def delete_profile(current_user):
     pass
