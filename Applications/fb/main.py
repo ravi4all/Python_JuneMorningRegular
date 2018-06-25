@@ -1,4 +1,5 @@
 from datetime import datetime
+import readWrite
 
 users = []
 userData = {}
@@ -90,22 +91,48 @@ def register():
         else:
             print("Password do not match")
 
+    # users.clear()
     users.append(userData.copy())
+
+    readWrite.save_user(userData)
+    print("Data Saved...")
 
     for user in users:
         print(user)
 
 def login():
+    user = readWrite.read_user()
+
+    # user = ["'ram','ram@gmail.com','ram'\n'shyam'..."]
+
+    # print(type(user))
+    # print(user[0].split("\n"))
+    user = user[0].split("\n")
+
+    # user = [
+    #     ['ram','ram@gmail.com','ram'],
+    #     ['shyam','shyam@gmail.com','1234']
+    # ]
+
     emailId = input("Enter emailID : ")
     pwd = input("Enter Password : ")
 
-    for user in users:
-        if user['email'] == emailId and user['password'] == pwd:
+    for i in range(len(user)):
+        if emailId in user[i] and pwd in user[i]:
             print("Login Success")
             login_success(user)
             break
     else:
-        print("Login Failed")
+        print("Login Failed...")
+
+    # for user in users:
+    #     if user['email'] == emailId and user['password'] == pwd:
+    #         print("Login Success")
+    #         login_success(user)
+    #         break
+    # else:
+    #     print("Login Failed")
+
 
 def err_handler():
     print("Wrong Choice...")
